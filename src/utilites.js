@@ -1,0 +1,1 @@
+export const grabIdandData = doc => {return {id:doc.id, ...doc.data()}};

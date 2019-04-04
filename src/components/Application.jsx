@@ -2,58 +2,44 @@ import React, { Component } from 'react';
 // import Post from './Post';
 import Posts from './Posts';
 import { firestore } from '../firebase';
+import {grabIdandData} from '../utilites';
 
 class Application extends Component {
     state = {
-        posts: [
-            {
-                id: '1',
-                title: 'A sample 1',
-                content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis suscipit repellendus modi unde cumque, fugit in ad necessitatibus eos sed quasi et! Commodi repudiandae tempora ipsum fugiat. Quam, officia excepturi!',
-                user: {
-                    uid: '123',
-                    displayName: 'Bill Sample',
-                    email: 'Bill@sample.com',
-                    photoURL: 'https://www.fillmurray.com/300/300',
-                },
-                stars: 1,
-                comments: 57,
-            },
-            {
-                id: '2',
-                title: 'A sample 2',
-                content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis suscipit repellendus modi unde cumque, fugit in ad necessitatibus eos sed quasi et! Commodi repudiandae tempora ipsum fugiat. Quam, officia excepturi!',
-                user: {
-                    uid: '321',
-                    displayName: 'Seagal Sample',
-                    email: 'Bill@sample.com',
-                    photoURL: 'https://www.stevensegallery.com/300/300',
-                },
-                stars: 1,
-                comments: 57,
-            },
-        ],
+        posts: [],
     };
 
-    componentDidMount = () => {
-        const posts = firestore.collection('posts').get()
-            .then(snapshot => {
-                console.log(snapshot);
-            });
+    unsubscribe = null;
+    //Fetching Database
+    componentDidMount = async () => {
+        // const snapshot = await firestore.collection('posts').get();
+        // snapshot.forEach(doc => {
+        //     const id = doc.id;
+        //     const data = doc.data;
+        //     console.log({id},{data});
+        // });
+        // const posts = snapshot.docs.map(grabIdandData);
+        // console.log(posts);
 
-        console.log({ posts });
+        // this.setState({posts});
+        this.unsubscribe = firestore.collection('posts').onSnapshot(snapshot => {
+                const posts = snapshot.docs.map(grabIdandData);
+                this.setState({posts});
+         });
+    };
+
+    componentWillUnmount = () => {
+        this.unsubscribe();
     }
 
-    handleCreate = post => {
-        const { posts } = this.state;
-        this.setState({ posts: [post, ...posts] });
-    }
     render() {
         const { posts } = this.state;
         return (
             <main className="Application">
                 <h1>My 2 cents</h1>
-                <Posts posts={posts} onCreate={this.handleCreate}></Posts>
+                <Posts 
+                    posts={posts} 
+                 />
             </main>
         )
     }
