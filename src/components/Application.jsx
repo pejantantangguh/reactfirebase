@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import Posts from './Posts';
 import { firestore } from '../firebase';
 import {grabIdandData} from '../utilites';
+import Authentication from './Authentication';
 
 class Application extends Component {
     state = {
         posts: [],
+        user: null,
     };
 
     unsubscribe = null;
@@ -33,10 +35,11 @@ class Application extends Component {
     }
 
     render() {
-        const { posts } = this.state;
+        const { posts,user } = this.state;
         return (
             <main className="Application">
                 <h1>My 2 cents</h1>
+                <Authentication user={user} />
                 <Posts 
                     posts={posts} 
                  />
