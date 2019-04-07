@@ -16,19 +16,19 @@ class SignUp extends Component {
     render(){
         const {displayName, email,password} = this.state;
         return(
-            <form ClassName="SignUp" onSubmit ={this.handleSubmit}>
+            <form className="SignUp" onSubmit ={this.handleSubmit}>
                 <h2>Sign Up</h2>
                 <input 
                     type="text"
                     name={displayName}
-                    placeHolder="Display Name"
+                    placeholder="Display Name"
                     value={displayName}
                     onChange = {this.handleChange}
                     />
                 <input
                     type="email"
                     name={email}
-                    placeHolder="sample@example.com"
+                    placeholder="sample@example.com"
                     value={email}
                     onChange = {this.handleChange}
                     />
@@ -36,7 +36,7 @@ class SignUp extends Component {
                 <input 
                     type="password"
                     name={password}
-                    placeHolder="Password"
+                    placeholder="Password"
                     value={password}
                     onChange = {this.handleChange}
                 />

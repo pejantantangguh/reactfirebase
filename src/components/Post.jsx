@@ -53,9 +53,7 @@ Post.defaultProps = {
     },
     stars: 1,
     comments: 57,
-    createdAt: new Date(),
-    stars: 0,
-    comments: 0,
+    createdAt: new Date()
 }
 
 export default Post;

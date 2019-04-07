@@ -1,8 +1,7 @@
 import React from 'react';
 
-import moment from 'moment';
 
-const CurrentUser = ({photoUrl,displayName,email,createdAt,Children}) => {
+const CurrentUser = ({photoUrl,displayName,email,Children}) => {
     return(
         <section className= "CurrentUser">
             <div ClassName ="CurrentUser--profile">
@@ -10,7 +9,7 @@ const CurrentUser = ({photoUrl,displayName,email,createdAt,Children}) => {
                 <div className="CurrentUser--information">
                     <h2>{displayName}</h2>
                     <p className="email">{email}</p>
-                    <p className="created-at">{moment(createdAt).calender()}</p>
+                    {/* <p className="created-at">{moment(createdAt.toDate()).calendar()}</p> */}
                 </div>
             </div>
             <div>

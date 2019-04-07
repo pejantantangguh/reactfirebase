@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import Post from './Post';
 import Posts from './Posts';
-import { firestore } from '../firebase';
+import { firestore, auth} from '../firebase';
 import {grabIdandData} from '../utilites';
 import Authentication from './Authentication';
 
@@ -11,24 +11,20 @@ class Application extends Component {
         user: null,
     };
 
-    unsubscribe = null;
+    unsubscribeFromFireStore = null;
+    unsubscribeFromAuth = null;
     //Fetching Database
     componentDidMount = async () => {
-        // const snapshot = await firestore.collection('posts').get();
-        // snapshot.forEach(doc => {
-        //     const id = doc.id;
-        //     const data = doc.data;
-        //     console.log({id},{data});
-        // });
-        // const posts = snapshot.docs.map(grabIdandData);
-        // console.log(posts);
-
-        // this.setState({posts});
         this.unsubscribe = firestore.collection('posts').onSnapshot(snapshot => {
                 const posts = snapshot.docs.map(grabIdandData);
                 this.setState({posts});
          });
+         this.unsubscribeFromAuth = auth.onAuthStateChanged (user => {
+            this.setState({user});
+        });
     };
+
+
 
     componentWillUnmount = () => {
         this.unsubscribe();
