@@ -1,10 +1,12 @@
 import React from 'react';
+import {SignOut} from '../firebase';
+
 
 
 const CurrentUser = ({photoURL,displayName,email,Children}) => {
     return(
         <section className= "CurrentUser">
-            <div ClassName ="CurrentUser--profile">
+            <div className ="CurrentUser--profile">
                 {photoURL && <img src={photoURL} alt={displayName} />}
                 <div className="CurrentUser--information">
                     <h2>{displayName}</h2>
@@ -14,7 +16,7 @@ const CurrentUser = ({photoURL,displayName,email,Children}) => {
             </div>
             <div>
                 <div>{Children}</div>
-                <div>SIgn Out</div>
+                <button onClick={SignOut}>Sign Out</button>
             </div>
         </section>
     );
@@ -28,3 +30,4 @@ CurrentUser.defaultProps = {
 };
 
 export default CurrentUser;
+
