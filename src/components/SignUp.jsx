@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {auth} from '../firebase';
+import {auth, createUserProfileDocument} from '../firebase';
 
 class SignUp extends Component {
     state = {displayName:'', email:'', password:''};
@@ -20,6 +20,7 @@ class SignUp extends Component {
                 password
             );
             user.updateProfile({displayName});
+            createUserProfileDocument (user, {displayName});
         } catch (error) {
             console.error(error);
         }
@@ -29,15 +30,15 @@ class SignUp extends Component {
 
 
     render(){
-        const {name,email,password} = this.state;
+        const {displayName,email,password} = this.state;
         return(
             <form className="SignUp" onSubmit ={this.handleSubmit}>
                 <h2>Sign Up</h2>
                 <input 
                     type="text"
-                    name="name"
+                    name="displayName"
                     placeholder="Display Name"
-                    value={name}
+                    value={displayName}
                     onChange={this.handleChange}
                     />
                 <input

@@ -14,7 +14,7 @@ class AddPost extends Component {
 
     const { title, content } = this.state;
     const {uid, displayName, email, photoURL} = auth.currentUser || {};
-
+    
     const post = {
       title,
       content,
@@ -34,6 +34,8 @@ class AddPost extends Component {
 
     this.setState({ title: '', content: '' });
   };
+
+
 
   render() {
     const { title, content } = this.state;
